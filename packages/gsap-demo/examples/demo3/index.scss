@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Anybody';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/ETCAnybodyPB.woff2') format('woff2-variations');
+    font-display: block;
+    font-style: normal italic;
+    font-weight: 100 900;
+    font-stretch: 10% 400%;
+}
+
+:root {
+    --fontSize: 48px;
+}
+
+/*  ==========================================================
+	MIXINS
+	========================================================== */
+
+@mixin cuboid($cWidth, $cHeight, $cDepth, $cColor) {
+    position: relative;
+    width: $cWidth;
+    height: $cHeight;
+    transform-style: preserve-3d;
+
+    .face {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: $cColor;
+    }
+
+    .face--front {
+        width: $cWidth;
+        height: $cHeight;
+        transform: translateZ(calc(#{$cDepth}/2));
+    }
+
+    .face--back {
+        width: $cWidth;
+        height: $cHeight;
+        transform: translateZ(calc(#{$cDepth}/2 *-1)) rotateY(180deg);
+    }
+
+    .face--left {
+        width: $cDepth;
+        height: $cHeight;
+        transform: translateX(calc(#{$cDepth}/2 *-1)) rotateY(-90deg);
+    }
+
+    .face--right {
+        width: $cDepth;
+        height: $cHeight;
+        transform: translateX(calc(#{$cWidth} - #{$cDepth}/2)) rotateY(90deg);
+    }
+
+    .face--top {
+        width: $cWidth;
+        height: $cDepth;
+        transform: translateY(calc(#{$cDepth}/2 *-1)) rotateX(90deg);
+    }
+
+    .face--bottom {
+        width: $cWidth;
+        height: $cDepth;
+        transform: translateY(calc(#{$cHeight} - #{$cDepth}/2)) rotateX(-90deg);
+    }
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #161616;
+    background-image: radial-gradient(farthest-side at 45vw 80vh, rgba(255, 255, 255, 0.05) 0%, #101010 100%);
+    font-family: 'Anybody', Courier, monospace;
+    color: white;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    perspective: 500px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.frame {
+    @include cuboid(320px, 380px, 40px, black);
+
+    .face--front {
+        background-image: radial-gradient(farthest-side at 110px 0px, rgba(white, 0.2) 0%, #171717 100%);
+    }
+
+    .face--bottom {
+        background: black;
+    }
+
+    .face--back {
+        box-shadow: 0 100px 70px 0 rgba(0, 0, 0, 0.7);
+    }
+}
+
+.face {
+    overflow: hidden;
+}
+
+.etc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    margin: 0;
+    font-size: 400px;
+    font-stretch: 400%;
+    font-weight: 900;
+    letter-spacing: -20px;
+    color: rgba(white, 0.03);
+}
+
+.txt {
+    margin: 0;
+    font-size: var(--fontSize);
+    font-weight: 100;
+    font-stretch: 400%;
+    font-style: normal;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    line-height: 0.8;
+    // text-align: center;
+    opacity: 0.4;
+}
+
+
+.gsap-3-logo {
+    width: 20vw;
+    max-width: 150px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
