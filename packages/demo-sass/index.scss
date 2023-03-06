@@ -1,0 +1,32 @@
+// =========1. 变量=======
+// $highlight-color: #F90;
+// $highlight-border: 1px solid $highlight-color;
+// .selected {
+//   border: $highlight-border;
+// }
+// 2.嵌套CSS 规则
+// #content {
+//   article {
+//     h1 { color: #333 }
+//     p { margin-bottom: 1.4em }
+//   }
+//   aside { background-color: #EEE }
+// }
+
+// 伪类
+// article a {
+//   color: blue;
+//   &:hover { color: red }
+// }
+
+// 3.导入SASS文件;
+// 5. 混合器;
+// @mixin rounded-corners{
+//   -moz-border-radius: 5px;
+//   -webkit-border-radius: 5px;
+//   border-radius: 5px;
+// }
+
+// notices {
+//   @include rounded-corners;
+// }
